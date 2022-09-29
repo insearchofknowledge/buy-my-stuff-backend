@@ -1,4 +1,4 @@
-package com.funtastic4.BuyMyStuff;
+package com.funtastic4.buymystuff;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

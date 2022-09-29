@@ -1,0 +1,59 @@
+package com.funtastic4.buymystuff.controller;
+
+import com.funtastic4.buymystuff.Dto.ProducerDto;
+
+import com.funtastic4.buymystuff.service.ProducerService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.persistence.EntityNotFoundException;
+import java.util.List;
+
+@Slf4j
+@RestController
+@RequestMapping(path = "/api/producers")
+public class ProducerController {
+
+
+    private final ProducerService producerService;
+
+    public ProducerController(ProducerService producerService) {
+        this.producerService = producerService;
+    }
+
+    @PostMapping("")
+    public ResponseEntity<ProducerDto> addProducer(@RequestBody ProducerDto producerDto) {
+        ProducerDto newProducerDto = producerService.createProducer(producerDto);
+        return new ResponseEntity<>(newProducerDto, HttpStatus.CREATED);
+    }
+
+    @GetMapping(value = "",consumes = "application/json", produces = "application/json")
+    public ResponseEntity<List<ProducerDto>> getAllProducers() {
+        List<ProducerDto> producerDtoList = producerService.findAllProducers();
+//        return new ResponseEntity<>(producerDtoList, HttpStatus.OK);
+        return ResponseEntity.ok(producerDtoList);
+    }
+
+    @GetMapping("/{producerID}")
+    public ProducerDto getAllProducers(@PathVariable("producerID") Long producerId) {
+        return producerService.findProducerById(producerId);
+    }
+
+    @PutMapping("/{producerID}")
+    public ProducerDto getAllProducers(@PathVariable("producerID") Long producerId, @RequestBody ProducerDto producerDto) {
+        return producerService.updateProducer(producerId, producerDto);
+    }
+
+    @DeleteMapping("/{producerID}")
+    public void deleteProducer(@PathVariable("producerID") Long producerId) {
+        producerService.deleteProducer(producerId);
+    }
+
+    @ExceptionHandler(value = EntityNotFoundException.class)
+    public String handleExceptions(EntityNotFoundException exception) {
+        log.error(exception.getMessage(), exception);
+        return exception.getMessage();
+    }
+}

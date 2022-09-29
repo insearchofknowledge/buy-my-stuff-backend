@@ -1,4 +1,4 @@
-package com.funtastic4.BuyMyStuff;
+package com.funtastic4.buymystuff;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
