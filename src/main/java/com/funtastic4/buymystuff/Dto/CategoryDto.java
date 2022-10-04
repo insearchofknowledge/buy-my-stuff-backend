@@ -2,9 +2,11 @@ package com.funtastic4.buymystuff.Dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class CategoryDto {
 
     private Long id;

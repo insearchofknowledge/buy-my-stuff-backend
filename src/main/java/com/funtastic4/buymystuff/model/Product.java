@@ -3,7 +3,6 @@ package com.funtastic4.buymystuff.model;
 import com.funtastic4.buymystuff.enums.ProductType;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -12,7 +11,6 @@ import javax.persistence.*;
 @Table(name ="products")
 @Getter
 @Setter
-
 public class Product {
 
     @Id
@@ -41,7 +39,6 @@ public class Product {
                 ", imageUrl='" + imageUrl + '\'' +
                 ", price=" + price +
                 ", productType=" + productType +
-
                 '}';
     }
 }

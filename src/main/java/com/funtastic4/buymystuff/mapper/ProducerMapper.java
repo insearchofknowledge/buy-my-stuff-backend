@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 public class ProducerMapper implements Mapper<Producer, ProducerDto> {
     @Override
     public ProducerDto convertToDto(Producer entity) {
-
         ProducerDto producerDto =new ProducerDto();
 
         producerDto.setId(entity.getId());
