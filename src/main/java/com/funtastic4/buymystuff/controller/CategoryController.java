@@ -21,19 +21,19 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @PostMapping(value = "", consumes = "application/json", produces = "application/json")
+    @PostMapping(value = "", produces = "application/json")
     public ResponseEntity<CategoryDto> addCategory(@RequestBody CategoryDto categoryDto) {
         CategoryDto newCategoryDto = categoryService.createCategory(categoryDto);
         return new ResponseEntity<>(newCategoryDto, HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "{categoryId}", consumes = "application/json", produces = "application/json")
+    @GetMapping(value = "{categoryId}", produces = "application/json")
     public ResponseEntity<CategoryDto> getCategory(@PathVariable("categoryId") Long id) {
         CategoryDto categoryDto = categoryService.findCategoryById(id);
         return new ResponseEntity<>(categoryDto, HttpStatus.OK);
     }
 
-    @GetMapping(value = "", consumes = "application/json", produces = "application/json")
+    @GetMapping(value = "", produces = "application/json")
     public ResponseEntity<List<CategoryDto>> getAllCategories() {
         List<CategoryDto> categoryDtoList = categoryService.findAllCategories();
         return new ResponseEntity<>(categoryDtoList, HttpStatus.OK);
@@ -45,7 +45,7 @@ public class CategoryController {
         return new ResponseEntity<>(newCategoryDto, HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "{categoryId})", consumes = "application/json", produces = "application/json")
+    @DeleteMapping(value = "{categoryId})", produces = "application/json")
     public ResponseEntity<?> deleteCategory(@PathVariable("categoryId") Long id) {
         categoryService.deleteCategory(id);
         return new ResponseEntity<>(HttpStatus.OK);

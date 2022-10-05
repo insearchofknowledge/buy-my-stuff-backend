@@ -29,7 +29,7 @@ public class ProducerController {
         return new ResponseEntity<>(newProducerDto, HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "",consumes = "application/json", produces = "application/json")
+    @GetMapping(value = "", produces = "application/json")
     public ResponseEntity<List<ProducerDto>> getAllProducers() {
         List<ProducerDto> producerDtoList = producerService.findAllProducers();
 //        return new ResponseEntity<>(producerDtoList, HttpStatus.OK);
