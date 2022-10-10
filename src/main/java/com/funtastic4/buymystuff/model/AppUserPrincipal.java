@@ -20,7 +20,7 @@ public class AppUserPrincipal implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
         if (appUser.getRole()!=null) {
-            authorities.add(new SimpleGrantedAuthority(appUser.getRole().getRoleName()));
+            authorities.add(new SimpleGrantedAuthority(appUser.getRole().name()));
         }
         return authorities;
     }

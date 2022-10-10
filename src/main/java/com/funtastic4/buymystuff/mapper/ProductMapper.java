@@ -15,6 +15,7 @@ public class ProductMapper implements Mapper<Product, ProductDto> {
 
     private final ProducerRepository producerRepository;
     private final CategoryRepository categoryRepository;
+
     @Override
     public ProductDto convertToDto(Product entity) {
         ProductDto productDto = new ProductDto();
@@ -25,8 +26,13 @@ public class ProductMapper implements Mapper<Product, ProductDto> {
         productDto.setImageUrl(entity.getImageUrl());
         productDto.setPrice(entity.getPrice());
         productDto.setProductType(entity.getProductType());
-        productDto.setProducerDto(producerMapper.convertToDto(entity.getProducer()));
-        productDto.setCategoryDto(categoryMapper.convertToDto(entity.getCategory()));
+        if (entity.getProducer() != null) {
+            productDto.setProducerDto(producerMapper.convertToDto(entity.getProducer()));
+        }
+        if (entity.getCategory() != null) {
+            productDto.setCategoryDto(categoryMapper.convertToDto(entity.getCategory()));
+        }
+
 
         return productDto;
     }
@@ -41,9 +47,13 @@ public class ProductMapper implements Mapper<Product, ProductDto> {
         product.setImageUrl(dto.getImageUrl());
         product.setPrice(dto.getPrice());
         product.setProductType(dto.getProductType());
-        product.setProducer(producerRepository.getReferenceById(dto.getProducerDto().getId()));
-        product.setCategory(categoryRepository.getReferenceById(dto.getCategoryDto().getId()));
+        if (dto.getProducerDto() != null) {
+            product.setProducer(producerRepository.getReferenceById(dto.getProducerDto().getId()));
+        }
+        if (dto.getProductType() != null) {
+            product.setCategory(categoryRepository.getReferenceById(dto.getCategoryDto().getId()));
 
+        }
         return product;
     }
 }
