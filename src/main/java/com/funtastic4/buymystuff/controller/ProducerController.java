@@ -6,6 +6,7 @@ import com.funtastic4.buymystuff.service.ProducerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
@@ -14,6 +15,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping(path = "/api/producers")
+
 public class ProducerController {
 
 
@@ -23,6 +25,7 @@ public class ProducerController {
         this.producerService = producerService;
     }
 
+//    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("")
     public ResponseEntity<ProducerDto> addProducer(@RequestBody ProducerDto producerDto) {
         ProducerDto newProducerDto = producerService.createProducer(producerDto);

@@ -1,8 +1,12 @@
 package com.funtastic4.buymystuff.service;
 
+import com.funtastic4.buymystuff.Dto.AddProductDto;
 import com.funtastic4.buymystuff.Dto.ProductDto;
+import com.funtastic4.buymystuff.mapper.AddProductMapper;
 import com.funtastic4.buymystuff.mapper.ProductMapper;
 import com.funtastic4.buymystuff.model.Product;
+import com.funtastic4.buymystuff.repository.CategoryRepository;
+import com.funtastic4.buymystuff.repository.ProducerRepository;
 import com.funtastic4.buymystuff.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +23,12 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
+    private final AddProductMapper addProductMapper;
 
-    public ProductService(ProductRepository productRepository, ProductMapper productMapper) {
+    public ProductService(ProductRepository productRepository, ProductMapper productMapper, AddProductMapper addProductMapper) {
         this.productRepository = productRepository;
         this.productMapper = productMapper;
+        this.addProductMapper = addProductMapper;
     }
 
     public Product getProduct(Long id) {
@@ -38,9 +44,16 @@ public class ProductService {
         }
     }
 
-    public ProductDto createProduct(ProductDto productDto) {
+    public ProductDto createProduct2(ProductDto productDto) {
         checkProductName(productDto.getName());
         Product product = productMapper.convertToEntity(productDto);
+        productRepository.save(product);
+        return productMapper.convertToDto(product);
+    }
+
+    public ProductDto createProduct(AddProductDto addproductDto) {
+        checkProductName(addproductDto.getName());
+        Product product = addProductMapper.convertToEntity(addproductDto);
         productRepository.save(product);
         return productMapper.convertToDto(product);
     }

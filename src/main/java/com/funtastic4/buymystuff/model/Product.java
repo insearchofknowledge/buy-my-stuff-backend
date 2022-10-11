@@ -20,6 +20,7 @@ public class Product {
     private String description;
     private String imageUrl;
     private Double price;
+    //@Enumerated(EnumType.STRING)
     private ProductType productType;
 
     @ManyToOne
