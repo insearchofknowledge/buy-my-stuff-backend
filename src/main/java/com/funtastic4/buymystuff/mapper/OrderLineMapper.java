@@ -25,7 +25,7 @@ public class OrderLineMapper implements Mapper<OrderLine, OrderLineDto> {
         OrderLineDto orderLineDto = new OrderLineDto();
         orderLineDto.setId(entity.getId());
         orderLineDto.setProductPrice(entity.getProductPrice());
-        orderLineDto.setNumberOfProducts(entity.getNumberOfProducts());
+        orderLineDto.setQuantity(entity.getQuantity());
         if (entity.getProduct() != null) {
             orderLineDto.setProductDto(productMapper.convertToDto(productRepository.getReferenceById(entity.getProduct().getId())));
         }
@@ -41,7 +41,7 @@ public class OrderLineMapper implements Mapper<OrderLine, OrderLineDto> {
             orderLine.setProduct(product.get());
         }
         orderLine.setProductPrice(dto.getProductPrice());
-        orderLine.setNumberOfProducts(dto.getNumberOfProducts());
+        orderLine.setQuantity(dto.getQuantity());
         return orderLine;
     }
 }

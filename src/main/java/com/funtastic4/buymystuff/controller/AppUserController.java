@@ -1,5 +1,6 @@
 package com.funtastic4.buymystuff.controller;
 
+import com.funtastic4.buymystuff.Dto.AppUserDto;
 import com.funtastic4.buymystuff.model.AppUser;
 import com.funtastic4.buymystuff.service.AppUserService;
 import lombok.AllArgsConstructor;
@@ -25,9 +26,15 @@ public class AppUserController {
         return user;
     }
 
+//    @PostMapping("/api/user")
+//    public ResponseEntity<?> createUser(@RequestBody AppUser appUser) {
+//        appUserService.createAppUser(appUser);
+//        return new ResponseEntity<>( "User successfully created.",HttpStatus.CREATED);
+//    }
+
     @PostMapping("/api/user")
-    public ResponseEntity<?> createUser(@RequestBody AppUser appUser) {
-        appUserService.createAppUser(appUser);
-        return new ResponseEntity<>( "User successfully created.",HttpStatus.CREATED);
+    public ResponseEntity<?> createUser(@RequestBody AppUserDto appUserDto){
+        appUserService.createAppUser(appUserDto);
+        return new ResponseEntity<>("User successfully created.",HttpStatus.CREATED);
     }
 }

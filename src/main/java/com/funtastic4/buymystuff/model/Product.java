@@ -19,7 +19,9 @@ public class Product {
     private Long id;
     private String name;
     private String description;
-    private String imageUrl;
+    @Column(name="image_file")
+    @Lob
+    private byte[] imageFile;
     private Double price;
     //@Enumerated(EnumType.STRING)
     private ProductType productType;
@@ -41,7 +43,7 @@ public class Product {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", imageUrl='" + imageUrl + '\'' +
+                ", imageUrl='" + imageFile + '\'' +
                 ", price=" + price +
                 ", productType=" + productType +
                 '}';

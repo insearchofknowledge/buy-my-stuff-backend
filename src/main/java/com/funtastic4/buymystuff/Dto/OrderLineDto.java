@@ -10,7 +10,7 @@ import lombok.ToString;
 public class OrderLineDto {
 
     private Long id;
-    private Integer numberOfProducts;
+    private Integer quantity;
     private Double productPrice;
     private ProductDto productDto;
     private Long productDtoId;

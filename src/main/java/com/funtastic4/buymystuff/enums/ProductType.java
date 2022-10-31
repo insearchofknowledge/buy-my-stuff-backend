@@ -4,6 +4,8 @@ public enum ProductType {
 
     LEGS,
     UPPER_BODY,
-    HEAD;
+    HEAD,
+    HANDS,
+    NAKED_BIKE;
 
 }

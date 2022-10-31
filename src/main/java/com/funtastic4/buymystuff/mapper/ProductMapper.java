@@ -1,6 +1,7 @@
 package com.funtastic4.buymystuff.mapper;
 
 import com.funtastic4.buymystuff.Dto.ProductDto;
+import com.funtastic4.buymystuff.enums.ProductType;
 import com.funtastic4.buymystuff.model.Product;
 import com.funtastic4.buymystuff.repository.CategoryRepository;
 import com.funtastic4.buymystuff.repository.ProducerRepository;
@@ -23,7 +24,7 @@ public class ProductMapper implements Mapper<Product, ProductDto> {
         productDto.setId(entity.getId());
         productDto.setName(entity.getName());
         productDto.setDescription(entity.getDescription());
-        productDto.setImageUrl(entity.getImageUrl());
+        productDto.setImageFile(entity.getImageFile());
         productDto.setPrice(entity.getPrice());
         productDto.setProductType(entity.getProductType());
         if (entity.getProducer() != null) {
@@ -32,7 +33,6 @@ public class ProductMapper implements Mapper<Product, ProductDto> {
         if (entity.getCategory() != null) {
             productDto.setCategoryDto(categoryMapper.convertToDto(entity.getCategory()));
         }
-
 
         return productDto;
     }
@@ -44,14 +44,14 @@ public class ProductMapper implements Mapper<Product, ProductDto> {
         product.setId(dto.getId());
         product.setName(dto.getName());
         product.setDescription(dto.getDescription());
-        product.setImageUrl(dto.getImageUrl());
+        product.setImageFile(dto.getImageFile());
         product.setPrice(dto.getPrice());
         product.setProductType(dto.getProductType());
         if (dto.getProducerDto() != null) {
-            product.setProducer(producerRepository.getReferenceById(dto.getProducerDto().getId()));
+            product.setProducer(producerRepository.getReferenceById(dto.getProducerDto().getId())); // .getProducerDto gets only the ID that is sent from the frontend
         }
-        if (dto.getProductType() != null) {
-            product.setCategory(categoryRepository.getReferenceById(dto.getCategoryDto().getId()));
+        if (dto.getCategoryDto() != null) {
+            product.setCategory(categoryRepository.getReferenceById(dto.getCategoryDto().getId())); // .getCategoryDto gets only the ID that is sent from the frontend
 
         }
         return product;

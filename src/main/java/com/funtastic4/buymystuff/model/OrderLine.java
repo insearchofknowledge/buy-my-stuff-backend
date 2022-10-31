@@ -14,10 +14,20 @@ public class OrderLine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Integer numberOfProducts;
+    private Integer quantity;
     private Double productPrice;
+    @Transient
+    private Double totalPrice;
 
     @ManyToOne
     @JoinColumn(name = "productId")
     private Product product;
+
+    @ManyToOne
+    @JoinColumn(name= "orderId")
+    private Order order;
+
+    public Double getTotalPrice(){
+        return getProduct().getPrice() * getQuantity();
+    }
 }

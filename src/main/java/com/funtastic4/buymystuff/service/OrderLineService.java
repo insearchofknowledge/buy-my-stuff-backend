@@ -33,7 +33,7 @@ public class OrderLineService {
 
     public OrderLineDto updateOrderLine(Long id, OrderLineDto orderLineDto) {
         OrderLine orderLine = orderLineRepository.getReferenceById(id);
-        orderLine.setNumberOfProducts(orderLineDto.getNumberOfProducts());
+        orderLine.setQuantity(orderLineDto.getQuantity());
         orderLineRepository.save(orderLine);
         return orderLineMapper.convertToDto(orderLine);
     }

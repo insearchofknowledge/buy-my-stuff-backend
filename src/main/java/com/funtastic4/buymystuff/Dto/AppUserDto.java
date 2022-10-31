@@ -1,22 +1,15 @@
-package com.funtastic4.buymystuff.model;
+package com.funtastic4.buymystuff.Dto;
 
 import com.funtastic4.buymystuff.enums.Role;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
-import javax.persistence.*;
 import java.util.List;
 
-@Entity
-@Table(name="users")
 @Getter
 @Setter
-@ToString
-public class AppUser {
+public class AppUserDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstName;
     private String lastName;
@@ -25,12 +18,7 @@ public class AppUser {
     private String city;
     private String address;
     private String avatar;
-    @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "user")
-    List<Order> orders;
-
-
-
+    private List<OrderDto> orders;
 }
