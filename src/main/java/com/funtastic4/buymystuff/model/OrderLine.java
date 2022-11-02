@@ -24,6 +24,10 @@ public class OrderLine {
     private Product product;
 
     @ManyToOne
+    @JoinColumn(name = "userId")
+    private AppUser appUser;
+
+    @ManyToOne
     @JoinColumn(name= "orderId")
     private Order order;
 

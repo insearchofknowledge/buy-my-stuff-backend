@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 @Getter
 @Setter
 @ToString
@@ -31,6 +31,8 @@ public class AppUser {
     @OneToMany(mappedBy = "user")
     List<Order> orders;
 
+    @OneToMany(mappedBy = "appUser")
+    List<OrderLine> orderLines;
 
 
 }

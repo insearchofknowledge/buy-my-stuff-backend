@@ -3,8 +3,8 @@ package com.funtastic4.buymystuff.mapper;
 import com.funtastic4.buymystuff.Dto.OrderLineDto;
 import com.funtastic4.buymystuff.model.OrderLine;
 import com.funtastic4.buymystuff.model.Product;
+import com.funtastic4.buymystuff.repository.AppUserRepository;
 import com.funtastic4.buymystuff.repository.ProductRepository;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -14,10 +14,14 @@ public class OrderLineMapper implements Mapper<OrderLine, OrderLineDto> {
 
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
+    private final AppUserMapper appUserMapper;
+    private final AppUserRepository appUserRepository;
 
-    public OrderLineMapper(ProductRepository productRepository, ProductMapper productMapper) {
+    public OrderLineMapper(ProductRepository productRepository, ProductMapper productMapper, AppUserMapper appUserMapper, AppUserRepository appUserRepository) {
         this.productRepository = productRepository;
         this.productMapper = productMapper;
+        this.appUserMapper = appUserMapper;
+        this.appUserRepository = appUserRepository;
     }
 
     @Override
@@ -29,6 +33,8 @@ public class OrderLineMapper implements Mapper<OrderLine, OrderLineDto> {
         if (entity.getProduct() != null) {
             orderLineDto.setProductDto(productMapper.convertToDto(productRepository.getReferenceById(entity.getProduct().getId())));
         }
+        orderLineDto.setTotalPrice(entity.getTotalPrice());
+        orderLineDto.setAppUserDto(appUserMapper.convertToDto(appUserRepository.getReferenceById(entity.getAppUser().getId())));
         return orderLineDto;
     }
 
@@ -36,7 +42,7 @@ public class OrderLineMapper implements Mapper<OrderLine, OrderLineDto> {
     public OrderLine convertToEntity(OrderLineDto dto) {
         OrderLine orderLine = new OrderLine();
         orderLine.setId(dto.getId());
-        Optional<Product> product = productRepository.findById(dto.getProductDtoId());
+        Optional<Product> product = productRepository.findById(dto.getProductDto().getId());
         if (product.isPresent()) {
             orderLine.setProduct(product.get());
         }
