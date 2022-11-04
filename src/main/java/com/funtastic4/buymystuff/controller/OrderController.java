@@ -1,5 +1,6 @@
 package com.funtastic4.buymystuff.controller;
 
+import com.funtastic4.buymystuff.Dto.AddOrderDto;
 import com.funtastic4.buymystuff.Dto.OrderDto;
 import com.funtastic4.buymystuff.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
@@ -23,8 +24,8 @@ public class OrderController {
     }
 
     @PostMapping(value = "")
-    public ResponseEntity<OrderDto> addOrder(@RequestBody OrderDto orderDto) {
-        OrderDto orderDtoToCreate = orderService.createOrder(orderDto);
+    public ResponseEntity<OrderDto> addOrder(@RequestBody AddOrderDto addOrderDto) {
+        OrderDto orderDtoToCreate = orderService.createOrder(addOrderDto);
         return new ResponseEntity<>(orderDtoToCreate, HttpStatus.CREATED);
     }
 }

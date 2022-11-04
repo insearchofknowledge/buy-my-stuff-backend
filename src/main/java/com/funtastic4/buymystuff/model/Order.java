@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -17,7 +18,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
-    private LocalDate orderDate;
+    private LocalDateTime orderDate;
     private String deliveryAddress;
     private OrderStatus orderStatus;
 
@@ -28,14 +29,14 @@ public class Order {
     @JoinColumn(name = "userId")
     private AppUser user;
 
-    @Transient
     private Double totalCost;
 
-    public double getTotalCost() {
+    public Double calculateTotalCost() {
         double sum = 0;
         for (OrderLine line : orderLines) {
             sum += line.getTotalPrice();
         }
+        System.out.println("Calculated sum: "+sum);
         return sum;
     }
 }

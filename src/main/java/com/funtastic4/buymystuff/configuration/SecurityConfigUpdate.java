@@ -30,7 +30,8 @@ public class SecurityConfigUpdate /* extends GlobalMethodSecurityConfiguration*/
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
 
         httpSecurity.authorizeRequests()
-                .antMatchers("/user**").hasRole("ADMIN").antMatchers("/user**").hasRole("ADMIN")
+                .antMatchers("/user**").hasRole("ADMIN")
+                .antMatchers("/user**").hasRole("ADMIN")
                 .anyRequest().permitAll();
         httpSecurity.formLogin();
         httpSecurity.httpBasic();

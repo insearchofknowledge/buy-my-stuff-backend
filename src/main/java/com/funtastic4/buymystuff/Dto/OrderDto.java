@@ -5,14 +5,15 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
 @Setter
 public class OrderDto {
 
-    private Long orderID;
-    private LocalDate orderDate;
+    private Long orderId;
+    private LocalDateTime orderDate;
     private String deliveryAddress;
     private OrderStatus orderStatus;
     private List<OrderLineDto> orderLineDtoList;
