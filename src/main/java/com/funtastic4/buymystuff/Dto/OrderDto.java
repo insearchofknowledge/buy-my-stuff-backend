@@ -1,8 +1,7 @@
 package com.funtastic4.buymystuff.Dto;
 
 import com.funtastic4.buymystuff.enums.OrderStatus;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -10,6 +9,9 @@ import java.util.List;
 
 @Getter
 @Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrderDto {
 
     private Long orderId;

@@ -1,12 +1,12 @@
 package com.funtastic4.buymystuff.Dto;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrderLineDto {
 
     private Long id;
