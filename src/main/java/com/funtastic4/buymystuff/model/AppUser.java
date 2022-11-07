@@ -1,9 +1,7 @@
 package com.funtastic4.buymystuff.model;
 
 import com.funtastic4.buymystuff.enums.Role;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,6 +10,8 @@ import java.util.List;
 @Table(name = "users")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString
 public class AppUser {
 
@@ -21,18 +21,20 @@ public class AppUser {
     private String firstName;
     private String lastName;
     private String email;
+    private String phoneNumber;
     private String password;
+    private String county;
     private String city;
-    private String address;
+    private String street;
+    private String zipCode;
     private String avatar;
     @Enumerated(EnumType.STRING)
     private Role role;
 
     @OneToMany(mappedBy = "user")
-    List<Order> orders;
+    private List<Order> orders;
 
     @OneToMany(mappedBy = "appUser")
-    List<OrderLine> orderLines;
-
+    private List<OrderLine> orderLines;
 
 }

@@ -30,16 +30,22 @@ public class OrderLineController {
         return new ResponseEntity<>(orderLineDtoList, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/{userId}")
+    public ResponseEntity<List<OrderLineDto>> getAllOrderLinesNotYetOrderedOfUser(@PathVariable("userId") Long userId) {
+        List<OrderLineDto> orderLineDtoList = orderLineService.getOrderLinesNotYetInOrdersForSpecificUsers(userId);
+        return new ResponseEntity<>(orderLineDtoList, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<OrderLineDto> createOrderLine(@RequestBody AddOrderLineDto addOrderLineDto) {
-        OrderLineDto orderLineDto =orderLineService.createOrderLine(addOrderLineDto);
+        OrderLineDto orderLineDto = orderLineService.createOrderLine(addOrderLineDto);
         return new ResponseEntity<>(orderLineDto, HttpStatus.CREATED);
     }
 
-    @PutMapping(value="{orderLineId}")
-    public ResponseEntity<OrderLineDto> updateOrderLine(@PathVariable("orderLineId") Long id, @RequestBody AddOrderLineDto addOrderLineDto){
+    @PutMapping(value = "{orderLineId}")
+    public ResponseEntity<OrderLineDto> updateOrderLine(@PathVariable("orderLineId") Long id, @RequestBody AddOrderLineDto addOrderLineDto) {
         OrderLineDto newOrderLineDto = orderLineService.updateOrderLine(id, addOrderLineDto.getQuantity());
-        return new ResponseEntity<>(newOrderLineDto,HttpStatus.OK);
+        return new ResponseEntity<>(newOrderLineDto, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "{orderLineId}")

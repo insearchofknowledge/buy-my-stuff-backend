@@ -14,12 +14,17 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderDto {
 
-    private Long orderId;
+    private Long id;
     private LocalDateTime orderDate;
-    private String deliveryAddress;
+    private String county;
+    private String city;
+    private String street;
+    private String zipCode;
+    private String phoneNumber;
+    private String additionalInformation;
     private OrderStatus orderStatus;
     private List<OrderLineDto> orderLineDtoList;
-    private AppUserDto appUserDto;
+    private AppUserDto user;
     private Double totalCost;
 
 }

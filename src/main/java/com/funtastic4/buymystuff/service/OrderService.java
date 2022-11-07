@@ -10,6 +10,7 @@ import com.funtastic4.buymystuff.repository.OrderLineRepository;
 import com.funtastic4.buymystuff.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,17 +31,21 @@ public class OrderService {
 
     public OrderDto createOrder(AddOrderDto addOrderDto) {
         Order order = addOrderMapper.convertToEntity(addOrderDto);
-        List<OrderLine> orderLinesList = new ArrayList<>();
+//        List<OrderLine> orderLinesList = orderLineRepository.getOrderLinesByAppUserIdAndOrderIsNull(addOrderDto.getUser());
+//        order.setOrderLines(orderLinesList);
+//        order.setTotalCost(order.calculateTotalCost());
         orderRepository.save(order);
-        for (Long orderLineId : addOrderDto.getOrderLineDtoList()) {
-            OrderLine orderLine = orderLineRepository.getReferenceById(orderLineId);
-            orderLine.setOrder(order);
-            orderLinesList.add(orderLine);
-            orderLineRepository.save(orderLine);
-        }
-        order.setOrderLines(orderLinesList);
-        order.setTotalCost(order.calculateTotalCost());
-        orderRepository.save(order);
+        orderLineRepository.updateOrderLines(order,order.getUser());  // since this is a query it will also save the modifications --> we don't have to call save again
+        orderLineRepository.getTotalCost(order, order.getId());  // since this is a query it will also save the modifications --> we don't have to call save again
+//        for (Long orderLineId : addOrderDto.getOrderLineDtoList()) {
+//            OrderLine orderLine = orderLineRepository.getReferenceById(orderLineId);
+//            orderLine.setOrder(order);
+//            orderLinesList.add(orderLine);
+//            orderLineRepository.save(orderLine);
+//        }
+//        order.setOrderLines(orderLinesList);
+//
+//        orderRepository.save(order);
 
         return orderMapper.convertToDto(order);
     }

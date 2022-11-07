@@ -13,8 +13,13 @@ import java.util.List;
 @ToString
 public class AddOrderDto {
 
-    private Long orderId;
-    private String deliveryAddress;
+    private Long id;
+    private String county;
+    private String city;
+    private String street;
+    private String zipCode;
+    private String phoneNumber;
+    private String additionalInformation;
     private List<Long> orderLineDtoList;
-    private Long appUserDto;
+    private Long user;
 }

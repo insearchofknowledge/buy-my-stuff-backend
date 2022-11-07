@@ -7,21 +7,19 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("/api/user")
 public class AppUserController {
 
     AppUserService appUserService;
     PasswordEncoder passwordEncoder;
 
-    @RequestMapping("/api/user")
+    @RequestMapping("")
     public Principal user(Principal user) {
         return user;
     }
@@ -32,9 +30,16 @@ public class AppUserController {
 //        return new ResponseEntity<>( "User successfully created.",HttpStatus.CREATED);
 //    }
 
-    @PostMapping("/api/user")
-    public ResponseEntity<?> createUser(@RequestBody AppUserDto appUserDto){
+    @GetMapping("{userId}")
+    public ResponseEntity<AppUserDto> getUserById(@PathVariable("userId") Long id) {
+        AppUserDto appUserDto = appUserService.getAppUserById(id);
+
+        return new ResponseEntity<>(appUserDto, HttpStatus.OK);
+    }
+
+    @PostMapping("")
+    public ResponseEntity<?> createUser(@RequestBody AppUserDto appUserDto) {
         appUserService.createAppUser(appUserDto);
-        return new ResponseEntity<>("User successfully created.",HttpStatus.CREATED);
+        return new ResponseEntity<>("User successfully created.", HttpStatus.CREATED);
     }
 }

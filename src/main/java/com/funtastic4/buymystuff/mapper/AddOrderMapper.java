@@ -33,9 +33,14 @@ public class AddOrderMapper implements Mapper<Order, AddOrderDto> {
     public Order convertToEntity(AddOrderDto dto) {
         Order order = new Order();
         order.setOrderDate(LocalDateTime.now());
-        order.setDeliveryAddress(dto.getDeliveryAddress());
+        order.setCounty(dto.getCounty());
+        order.setCity(dto.getCity());
+        order.setStreet(dto.getStreet());
+        order.setZipCode(dto.getZipCode());
+        order.setPhoneNumber(dto.getPhoneNumber());
+        order.setAdditionalInformation(dto.getAdditionalInformation());
         order.setOrderStatus(OrderStatus.PLACED);
-        order.setUser(appUserRepository.getReferenceById(dto.getAppUserDto()));
+        order.setUser(appUserRepository.getReferenceById(dto.getUser()));
 
         return order;
     }

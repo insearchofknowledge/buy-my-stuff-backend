@@ -14,9 +14,11 @@ public class AppUserMapper implements Mapper<AppUser, AppUserDto> {
         appUserDto.setFirstName(entity.getFirstName());
         appUserDto.setLastName(entity.getLastName());
         appUserDto.setEmail(entity.getEmail());
-//        appUserDto.setPassword(entity.getPassword());
+        appUserDto.setPhoneNumber(entity.getPhoneNumber());
+        appUserDto.setCounty(entity.getCounty());
         appUserDto.setCity(entity.getCity());
-        appUserDto.setAddress(entity.getAddress());
+        appUserDto.setStreet(entity.getStreet());
+        appUserDto.setZipCode(entity.getZipCode());
         appUserDto.setAvatar(entity.getAvatar());
         appUserDto.setRole(entity.getRole());
 
@@ -26,13 +28,15 @@ public class AppUserMapper implements Mapper<AppUser, AppUserDto> {
     @Override
     public AppUser convertToEntity(AppUserDto dto) {
         AppUser appUser = new AppUser();
-        appUser.setId(dto.getId());
         appUser.setFirstName(dto.getFirstName());
         appUser.setLastName(dto.getLastName());
         appUser.setEmail(dto.getEmail());
+        appUser.setPhoneNumber(dto.getPhoneNumber());
         appUser.setPassword(dto.getPassword());
+        appUser.setCounty(dto.getCounty());
         appUser.setCity(dto.getCity());
-        appUser.setAddress(dto.getAddress());
+        appUser.setStreet(dto.getStreet());
+        appUser.setZipCode(dto.getZipCode());
         appUser.setAvatar(dto.getAvatar());
 
         return appUser;

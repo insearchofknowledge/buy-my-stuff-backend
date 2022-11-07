@@ -8,7 +8,16 @@ import org.springframework.stereotype.Service;
 public class OrderMapper implements Mapper<Order, OrderDto>{
     @Override
     public OrderDto convertToDto(Order entity) {
-        return null;
+        OrderDto orderDto= new OrderDto();
+        orderDto.setId(entity.getId());
+        orderDto.setOrderDate(entity.getOrderDate());
+        orderDto.setCounty(entity.getCounty());
+        orderDto.setCity(entity.getCity());
+        orderDto.setStreet(entity.getStreet());
+        orderDto.setZipCode(entity.getZipCode());
+        orderDto.setPhoneNumber(entity.getPhoneNumber());
+        orderDto.setOrderStatus(entity.getOrderStatus());
+        return orderDto;
     }
 
     @Override

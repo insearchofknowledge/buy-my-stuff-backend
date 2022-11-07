@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -17,9 +16,14 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long orderId;
+    private Long id;
     private LocalDateTime orderDate;
-    private String deliveryAddress;
+    private String county;
+    private String city;
+    private String street;
+    private String zipCode;
+    private String phoneNumber;
+    private String additionalInformation;
     private OrderStatus orderStatus;
 
     @OneToMany(mappedBy = "order")

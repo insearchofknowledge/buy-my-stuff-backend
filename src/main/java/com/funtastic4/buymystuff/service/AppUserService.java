@@ -29,12 +29,13 @@ public class AppUserService implements UserDetailsService {
         this.appUserMapper = appUserMapper;
     }
 
-    public void checkIfUserNameExists(String email){
-        Optional<AppUser> appUserOptional =appUserRepository.findAppUserByEmail(email);
-        if(appUserOptional.isPresent()){
+    public void checkIfUserNameExists(String email) {
+        Optional<AppUser> appUserOptional = appUserRepository.findAppUserByEmail(email);
+        if (appUserOptional.isPresent()) {
             throw new IllegalStateException(String.format("User with email: %s already exists.", email));
         }
     }
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         // Get user from database
@@ -46,7 +47,7 @@ public class AppUserService implements UserDetailsService {
         return new AppUserPrincipal(appUserOptional.get());
     }
 
-    public String createAppUser(AppUser appUser){
+    public String createAppUser(AppUser appUser) {
         checkIfUserNameExists(appUser.getEmail());
         appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
         appUser.setRole(Role.USER);
@@ -54,13 +55,18 @@ public class AppUserService implements UserDetailsService {
         return "User created successfully.";
     }
 
-    public String createAppUser(AppUserDto appUserDto){
+    public String createAppUser(AppUserDto appUserDto) {
         checkIfUserNameExists(appUserDto.getEmail());
-        AppUser appUser=appUserMapper.convertToEntity(appUserDto);
+        AppUser appUser = appUserMapper.convertToEntity(appUserDto);
         appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
         appUser.setRole(Role.USER);
         appUserRepository.save(appUser);
         return "User created successfully.";
+    }
+
+    public AppUserDto getAppUserById(Long id) {
+        AppUser appUser = appUserRepository.getReferenceById(id);
+        return appUserMapper.convertToDto(appUser);
     }
 }
 
