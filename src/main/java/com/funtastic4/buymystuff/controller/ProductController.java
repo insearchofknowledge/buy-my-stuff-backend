@@ -72,11 +72,11 @@ public class ProductController {
         return new ResponseEntity<>(productDtoList, HttpStatus.OK);
     }
 
-//    @GetMapping(value = "{categoryId}", produces = "application/json")
-//    public ResponseEntity<List<ProductDto>> getAllProductsByCategory(@PathVariable("categoryId") Long id) {
-//        List<ProductDto> productDtoList = productService.findProductsByCategory(id);
-//        return new ResponseEntity<>(productDtoList, HttpStatus.OK);
-//    }
+    @GetMapping(value = "byCategories/{categoryId}", produces = "application/json")
+    public ResponseEntity<List<ProductDto>> getAllProductsByCategory(@PathVariable("categoryId") Long id) {
+        List<ProductDto> productDtoList = productService.findProductsByCategory(id);
+        return new ResponseEntity<>(productDtoList, HttpStatus.OK);
+    }
 
     @PutMapping(value = "{productId}")
     public ResponseEntity<ProductDto> updateProduct(

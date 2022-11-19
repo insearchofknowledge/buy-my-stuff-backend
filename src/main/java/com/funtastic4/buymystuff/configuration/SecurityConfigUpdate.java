@@ -15,12 +15,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-//@EnableGlobalMethodSecurity(
-//        prePostEnabled = true,
-//        securedEnabled = true,
-//        jsr250Enabled = true
-//)
-public class SecurityConfigUpdate /* extends GlobalMethodSecurityConfiguration*/ {
+@EnableGlobalMethodSecurity(
+        prePostEnabled = true,
+        securedEnabled = true,
+        jsr250Enabled = true
+)
+public class SecurityConfigUpdate  extends GlobalMethodSecurityConfiguration {
     @Autowired
     AppUserService appUserService;
     @Autowired
@@ -30,14 +30,15 @@ public class SecurityConfigUpdate /* extends GlobalMethodSecurityConfiguration*/
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
 
         httpSecurity.authorizeRequests()
-                .antMatchers("/user**").hasRole("ADMIN")
+                .antMatchers("/api/products").hasAuthority("USER")
                 .antMatchers("/user**").hasRole("ADMIN")
                 .anyRequest().permitAll();
         httpSecurity.formLogin();
         httpSecurity.httpBasic();
         httpSecurity.csrf().ignoringAntMatchers("/api/**");
         httpSecurity.cors().disable();
-        httpSecurity.headers().frameOptions().disable(); // Usefully for H2 console
+        httpSecurity.logout();
+        httpSecurity.headers().frameOptions().disable(); // Useful for H2 console
 
 
         return httpSecurity.build();
