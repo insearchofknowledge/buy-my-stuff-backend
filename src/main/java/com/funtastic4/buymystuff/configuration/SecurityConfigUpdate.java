@@ -30,8 +30,11 @@ public class SecurityConfigUpdate  extends GlobalMethodSecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
 
         httpSecurity.authorizeRequests()
-                .antMatchers("/api/products").hasAuthority("USER")
-                .antMatchers("/user**").hasRole("ADMIN")
+//                .antMatchers("/api/products/add").hasAuthority("ADMIN")
+//                .antMatchers(HttpMethod.PUT,"/api/products").hasAuthority("ADMIN")
+//                .antMatchers(HttpMethod.DELETE,"/api/products").hasAuthority("ADMIN")
+//                .antMatchers(HttpMethod.PUT,"/api/categories").hasAuthority("ADMIN")
+//                .antMatchers(HttpMethod.PUT,"/api/producers").hasAuthority("ADMIN")
                 .anyRequest().permitAll();
         httpSecurity.formLogin();
         httpSecurity.httpBasic();

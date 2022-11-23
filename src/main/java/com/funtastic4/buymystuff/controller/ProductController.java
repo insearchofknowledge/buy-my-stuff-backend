@@ -29,7 +29,6 @@ public class ProductController {
         this.productService = productService;
     }
 
-
 //    @PreAuthorize("hasRole('ADMIN')")
 //    @PostMapping(value = "",produces = "application/json")
 //    public ResponseEntity<ProductDto> addProduct(@RequestBody ProductDto productDto) {
