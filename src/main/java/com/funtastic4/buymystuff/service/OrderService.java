@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
@@ -48,5 +49,9 @@ public class OrderService {
 //        orderRepository.save(order);
 
         return orderMapper.convertToDto(order);
+    }
+
+    public List<OrderDto> getOrdersByUserId(Long id){
+        return orderRepository.findOrdersByUserId(id).stream().map(orderMapper::convertToDto).collect(Collectors.toList());
     }
 }

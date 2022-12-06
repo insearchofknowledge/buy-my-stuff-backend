@@ -22,7 +22,6 @@ public interface OrderLineRepository extends JpaRepository<OrderLine, Long> {
 
     List<OrderLine> getOrderLinesByAppUserIdAndOrderIsNull(Long appUser_id);
 
-    //List<OrderLine> getOrderLinesWhereOrderIsNull();
     @Modifying
     @Query("update OrderLine a set a.order = ?1 where a.appUser = ?2 and a.order is null")
     void updateOrderLines(@Param("order_obj")Order order, @Param ("user_obj") AppUser appUser);
