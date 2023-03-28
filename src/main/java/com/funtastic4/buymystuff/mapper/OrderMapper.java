@@ -29,7 +29,7 @@ public class OrderMapper implements Mapper<Order, OrderDto>{
         orderDto.setOrderStatus(entity.getOrderStatus());
         orderDto.setTotalCost(entity.getTotalCost());
         orderDto.setAdditionalInformation(entity.getAdditionalInformation());
-        orderDto.setOrderLineDtoList(entity.getOrderLines().stream().map(orderLineMapper::convertToDto).collect(Collectors.toList()));
+//        orderDto.setOrderLineDtoList(entity.getOrderLines().stream().map(orderLineMapper::convertToDto).collect(Collectors.toList()));
         return orderDto;
     }
 

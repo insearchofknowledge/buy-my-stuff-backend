@@ -37,8 +37,11 @@ public class OrderLineService {
         return orderLineRepository.findAll().stream().map(orderLineMapper::convertToDto).collect(Collectors.toList());
     }
     public List<OrderLineDto> getOrderLinesNotYetInOrdersForSpecificUsers(Long userId){
-
         return orderLineRepository.getOrderLinesByAppUserIdAndOrderIsNull(userId).stream().map(orderLineMapper::convertToDto).collect(Collectors.toList());
+    }
+
+    public List<OrderLineDto> getOrderLinesByOrderId(Long orderId){
+        return orderLineRepository.getOrderLinesByOrderId(orderId).stream().map(orderLineMapper::convertToDto).collect(Collectors.toList());
     }
     public OrderLineDto createOrderLine(AddOrderLineDto addOrderLineDto) {
         Product productToBeAdded = productRepository.getReferenceById(addOrderLineDto.getProductDto());

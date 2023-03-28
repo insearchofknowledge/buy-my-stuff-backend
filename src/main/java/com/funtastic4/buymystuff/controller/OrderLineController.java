@@ -36,6 +36,12 @@ public class OrderLineController {
         return new ResponseEntity<>(orderLineDtoList, HttpStatus.OK);
     }
 
+    @GetMapping(value="/byOrder/{orderId}")
+    public ResponseEntity<List<OrderLineDto>> getOrderLinesByOrderId(@PathVariable("orderId") Long orderId){
+        List<OrderLineDto> orderLineDtoList =orderLineService.getOrderLinesByOrderId(orderId);
+        return new ResponseEntity<>(orderLineDtoList,HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<OrderLineDto> createOrderLine(@RequestBody AddOrderLineDto addOrderLineDto) {
         OrderLineDto orderLineDto = orderLineService.createOrderLine(addOrderLineDto);
